@@ -1,0 +1,147 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-royal: #0D47A1;
+  --color-gold: #D4AF37;
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-playfair);
+  --radius-lg: var(--radius);
+}
+
+:root {
+  --font-inter: "Inter", system-ui, -apple-system, sans-serif;
+  --font-playfair: "Playfair Display", Georgia, serif;
+  --background: #fafbfc;
+  --foreground: #1F2937;
+  --card: #ffffff;
+  --card-foreground: #1F2937;
+  --primary: #0D47A1;
+  --primary-foreground: #ffffff;
+  --secondary: #F5F5F5;
+  --muted: #F5F5F5;
+  --muted-foreground: #6B7280;
+  --border: #e8ecf1;
+  --radius: 0.75rem;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    margin: 0;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+    letter-spacing: -0.01em;
+  }
+}
+
+/* React Admin — interface institutionnelle */
+.RaList-main,
+.RaEdit-main,
+.RaCreate-main {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.RaList-content,
+.RaEdit-card,
+.RaCreate-card {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.RaList-actions {
+  align-items: center;
+  gap: 8px;
+}
+
+.RaList-actions .MuiToolbar-root {
+  min-height: auto;
+  padding: 0;
+}
+
+h1.RaList-title,
+.RaEdit-title,
+.RaCreate-title {
+  font-family: "Inter", system-ui, sans-serif !important;
+  font-weight: 600 !important;
+  color: #0f172a !important;
+  font-size: 0.9375rem !important;
+}
+
+.parish-login .RaLogin-card .MuiCardContent-root > form {
+  padding: 0 !important;
+}
+
+.RaSidebar-drawerPaper {
+  border: none !important;
+}
+
+.dashboard-root {
+  animation: dashboardFadeIn 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes dashboardFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.parish-form-body .RaSimpleForm-root {
+  padding: 0;
+}
+
+.parish-form-body .MuiFormLabel-root {
+  font-weight: 500;
+  font-size: 0.8125rem;
+}
+
+.parish-form-toolbar {
+  backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.92) !important;
+}
+
+.RaSimpleFormIterator-line {
+  border-radius: 12px !important;
+  border: 1px solid #e8ecf1 !important;
+  padding: 16px !important;
+  margin-bottom: 12px !important;
+  background: #f8fafc !important;
+}
+
+.RaSimpleFormIterator-add {
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  border: 1px dashed #d8dee8 !important;
+}
+
+.RaEdit-card > .MuiCardContent-root > .MuiTypography-root:first-child,
+.RaCreate-card > .MuiCardContent-root > .MuiTypography-root:first-child {
+  display: none;
+}
+
+/* Filtres liste */
+.RaList-filters .MuiFormLabel-root {
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  color: #64748b !important;
+}

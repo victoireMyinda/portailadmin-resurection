@@ -1,0 +1,227 @@
+{
+  "histoire": {
+    "title": "Historique de l'Église catholique",
+    "subtitle": "De Jésus-Christ à l'Église universelle d'aujourd'hui",
+    "blocks": [
+      {
+        "heading": "Les origines apostoliques",
+        "paragraphs": [
+          "L'Église catholique trouve son origine en Jésus-Christ, Fils de Dieu fait homme, mort et ressuscité pour le salut du monde. Avant de retourner auprès du Père, le Seigneur a confié aux apôtres la mission d'annoncer l'Évangile et d'administrer les sacrements.",
+          "Pierre, à qui Jésus a confié les clés du Royaume, et les autres apôtres posent les fondements de l'Église. Leur succession, assurée par les évêques en communion avec le Pape, garantit la fidélité de la foi à travers les siècles."
+        ]
+      },
+      {
+        "heading": "Expansion et mission",
+        "paragraphs": [
+          "De Jérusalem à Rome, de l'Afrique à l'Asie et aux Amériques, l'Église s'est répandue en annonçant le Christ crucifié et ressuscité. Les martyrs, les saints, les missionnaires et les enseignants ont transmis la foi reçue des apôtres.",
+          "En République Démocratique du Congo, l'Évangile a été accueilli avec ferveur. L'Église accompagne le peuple congolais dans la foi, l'éducation, la santé et la promotion de la justice et de la paix."
+        ]
+      },
+      {
+        "heading": "L'Église aujourd'hui",
+        "paragraphs": [
+          "L'Église catholique compte plus d'un milliard de fidèles dans le monde. Elle est une, sainte, catholique et apostolique. Guidée par le Saint-Esprit, elle demeure fidèle à la Parole de Dieu et à la tradition vivante transmise depuis les apôtres."
+        ]
+      }
+    ]
+  },
+  "sacrements": {
+    "title": "Les Sacrements",
+    "subtitle": "Signes visibles de la grâce invisible de Dieu",
+    "blocks": [
+      {
+        "heading": "Qu'est-ce qu'un sacrement ?",
+        "paragraphs": [
+          "Les sacrements sont des rites institués par le Christ et confiés à l'Église. Ils sont des signes efficaces de la grâce : ils sanctifient les fidèles, construisent le Corps du Christ et donnent un culte à Dieu."
+        ]
+      },
+      {
+        "heading": "Les sept sacrements",
+        "paragraphs": [
+          "Baptême : entrée dans la vie divine et dans la communauté chrétienne.",
+          "Confirmation : renforcement du baptême par le don de l'Esprit Saint.",
+          "Eucharistie : source et sommet de la vie chrétienne, corps et sang du Christ.",
+          "Réconciliation : pardon des péchés et réconciliation avec Dieu et l'Église.",
+          "Onction des malades : force et réconfort dans la maladie.",
+          "Ordre : consécration des évêques, prêtres et diacres au service de la communauté.",
+          "Mariage : alliance indissoluble entre un homme et une femme, signe de l'amour du Christ pour son Église."
+        ]
+      }
+    ]
+  },
+  "liturgie": {
+    "title": "La Liturgie",
+    "subtitle": "Célébration publique et officielle du culte divin",
+    "blocks": [
+      {
+        "heading": "Le mystère célébré",
+        "paragraphs": [
+          "La liturgie est l'action du Christ et de son Corps qu'est l'Église. Dans la célébration eucharistique, le sacrifice de la Croix est rendu présent de manière sacramentelle. Les fidèles participent activement en offrant leur vie avec celle du Christ."
+        ]
+      },
+      {
+        "heading": "Les éléments de la célébration",
+        "paragraphs": [
+          "La Parole de Dieu proclamée, les prières de l'assemblée, les chants, les gestes rituels et les sacrements constituent l'ensemble de la liturgie. Chaque élément a sa place et sa signification dans l'action de grâce adressée au Père."
+        ]
+      }
+    ]
+  },
+  "temps-liturgique": {
+    "title": "Le Temps liturgique",
+    "subtitle": "L'année chrétienne au rythme du mystère du Christ",
+    "blocks": [
+      {
+        "paragraphs": [
+          "L'année liturgique suit le mystère du Christ : son avènement (Avent et Noël), sa manifestation (Épiphanie), sa passion et résurrection (Carême et Pâques), son envoi de l'Esprit (Pentecôte) et le temps ordinaire pour approfondir la vie chrétienne.",
+          "Chaque temps possède une couleur liturgique, des lectures propres et une spiritualité particulière qui nourrit la foi des fidèles."
+        ]
+      }
+    ]
+  },
+  "fetes": {
+    "title": "Les Fêtes chrétiennes",
+    "subtitle": "Les grandes solennités de l'année",
+    "blocks": [
+      {
+        "paragraphs": [
+          "Noël : naissance du Sauveur. Pâques : victoire de la vie sur la mort. Pentecôte : don de l'Esprit Saint à l'Église. Assomption et Toussaint : gloire des saints au ciel.",
+          "Les fêtes mariales (Annonciation, Immaculée Conception, Nativité de Marie) honorent la Mère de Dieu. Les fêtes des apôtres et des saints patrons rappellent la communion des saints."
+        ]
+      }
+    ]
+  },
+  "saints": {
+    "title": "Les Saints",
+    "subtitle": "Témoins de la gloire de Dieu et modèles de vie chrétienne",
+    "blocks": [
+      {
+        "paragraphs": [
+          "Les saints sont des hommes et des femmes qui ont vécu en communion avec Dieu et dont l'Église reconnaît officiellement la sainteté. Ils intercèdent pour nous et nous inspirent dans notre cheminement vers le ciel.",
+          "La Vierge Marie, Mère de Dieu et Mère de l'Église, occupe une place unique. Les martyrs, les confesseurs, les vierges et les saints de notre temps montrent la diversité des vocations dans le Royaume."
+        ]
+      }
+    ]
+  },
+  "prieres": {
+    "title": "Les Prières catholiques",
+    "subtitle": "Dialogue du cœur avec Dieu",
+    "blocks": [
+      {
+        "heading": "Prières fondamentales",
+        "paragraphs": [
+          "Notre Père : prière que Jésus nous a enseignée.",
+          "Je vous salue Marie : prière mariale d'intercession.",
+          "Gloire au Père : louange à la Trinité.",
+          "Je crois en Dieu : profession de foi apostolique.",
+          "Acte de contrition : demande de pardon."
+        ]
+      },
+      {
+        "heading": "Formes de prière",
+        "paragraphs": [
+          "L'Église propose la prière vocale, la méditation et la contemplation. Le chapelet, l'adoration eucharistique, la lecture spirituelle et la participation à la messe sont des moyens privilégiés pour grandir dans la relation avec Dieu."
+        ]
+      }
+    ]
+  },
+  "catechisme": {
+    "title": "Le Catéchisme",
+    "subtitle": "Exposition fidèle de la foi de l'Église",
+    "blocks": [
+      {
+        "paragraphs": [
+          "Le Catéchisme de l'Église catholique présente de manière organique et synthétique les contenus essentiels de la foi et de la morale chrétienne.",
+          "Il est structuré en quatre parties : la profession de foi (Credo), la célébration du mystère chrétien (liturgie), la vie dans le Christ (morale) et la prière chrétienne."
+        ]
+      }
+    ]
+  },
+  "documents": {
+    "title": "Documents importants de l'Église",
+    "subtitle": "Magistère et enseignement officiel",
+    "blocks": [
+      {
+        "paragraphs": [
+          "La Bible : Parole de Dieu écrite, inspirée par le Saint-Esprit.",
+          "Le Catéchisme de l'Église catholique (1992).",
+          "Les documents du Concile Vatican II (1962-1965).",
+          "Les encycliques des Papes, notamment Laudato si' et Fratelli tutti.",
+          "Le Code de droit canonique et les directives des conférences épiscopales."
+        ]
+      }
+    ]
+  },
+  "bible": {
+    "title": "La Bible",
+    "subtitle": "La Parole de Dieu pour le salut des hommes",
+    "blocks": [
+      {
+        "paragraphs": [
+          "La Bible réunit l'Ancien et le Nouveau Testament. Elle raconte l'histoire du salut : la création, l'élection d'Israël, la venue du Messie Jésus-Christ, la fondation de l'Église et l'attente de la plénitude du Royaume.",
+          "L'Église catholique vénère la Bible comme Parole de Dieu et l'interprète dans la Tradition vivante, sous la guidance du Magistère."
+        ]
+      }
+    ]
+  },
+  "conciles": {
+    "title": "Les Conciles",
+    "subtitle": "Assemblées solennelles de l'Église universelle",
+    "blocks": [
+      {
+        "paragraphs": [
+          "Les conciles œcuméniques réunissent les évêques du monde entier sous l'autorité du Pape pour défendre et transmettre la foi, résoudre les questions doctrinales et disciplinaires.",
+          "Parmi les plus importants : Nicée (325), Trente (1545-1563), Vatican I (1869-1870) et Vatican II (1962-1965), qui a ouvert l'Église à la mission dans le monde moderne."
+        ]
+      }
+    ]
+  },
+  "papes": {
+    "title": "Les Papes",
+    "subtitle": "Successeurs de Pierre au service de l'unité",
+    "blocks": [
+      {
+        "paragraphs": [
+          "Le Pape, évêque de Rome, est le successeur de Pierre et le pasteur de l'Église universelle. Il exerce un ministère de primauté et de vigilance pour la communion de tous les fidèles.",
+          "François, Pape actuel, appelle l'Église à la miséricorde, à la sortie vers les périphéries et à la fraternité universelle."
+        ]
+      }
+    ]
+  },
+  "vocations": {
+    "title": "Les Vocations",
+    "subtitle": "Appel de Dieu à chacun",
+    "blocks": [
+      {
+        "paragraphs": [
+          "Tout baptisé reçoit une vocation : appel à la sainteté dans le monde ou dans la vie consacrée. Certains sont appelés au sacerdoce ministériel ou à la vie religieuse.",
+          "La paroisse accompagne le discernement vocationnel par la prière, la formation et l'exemple des prêtres et des religieux."
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "title": "Questions fréquentes sur la foi catholique",
+    "subtitle": "Réponses claires aux interrogations courantes",
+    "blocks": [
+      {
+        "heading": "Pourquoi aller à la messe le dimanche ?",
+        "paragraphs": [
+          "Le dimanche, jour de la Résurrection, les chrétiens se rassemblent pour célébrer l'Eucharistie, renouveler l'alliance avec Dieu et fortifier la communauté. C'est un précepte de l'Église et une nécessité spirituelle."
+        ]
+      },
+      {
+        "heading": "Pourquoi se confesser ?",
+        "paragraphs": [
+          "Le sacrement de la réconciliation restaure la communion avec Dieu et avec l'Église après le péché. C'est un acte de miséricorde et de guérison spirituelle."
+        ]
+      },
+      {
+        "heading": "Comment devenir catholique ?",
+        "paragraphs": [
+          "Le parcours du catéchuménat, généralement d'un an, accompagne les adultes vers le baptême, la confirmation et la première communion. Contactez votre paroisse pour en savoir plus."
+        ]
+      }
+    ]
+  }
+}

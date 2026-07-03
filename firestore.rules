@@ -1,0 +1,43 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isValidVisitorMessage() {
+      return request.resource.data.keys().hasOnly(['name', 'phone', 'message', 'createdAt', 'read'])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() >= 2
+        && request.resource.data.name.size() <= 120
+        && request.resource.data.phone is string
+        && request.resource.data.phone.size() >= 6
+        && request.resource.data.phone.size() <= 40
+        && request.resource.data.message is string
+        && request.resource.data.message.size() >= 10
+        && request.resource.data.message.size() <= 2000
+        && request.resource.data.createdAt is string
+        && request.resource.data.read == false;
+    }
+
+    match /visitorMessages/{messageId} {
+      allow create: if isValidVisitorMessage();
+      allow read, update, delete: if isSignedIn();
+    }
+
+    match /parishUsers/{userId} {
+      allow read, write: if isSignedIn();
+    }
+
+    match /siteAnalytics/summary {
+      allow read: if isSignedIn();
+      allow create, update: if true;
+    }
+
+    match /{collection}/{docId} {
+      allow read: if collection != 'visitorMessages' && collection != 'parishUsers' && collection != 'siteAnalytics';
+      allow write: if isSignedIn();
+    }
+  }
+}

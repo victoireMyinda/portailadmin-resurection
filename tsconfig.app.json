@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "es2023",
+    "lib": ["ES2023", "DOM"],
+    "module": "esnext",
+    "types": ["vite/client"],
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "resolveJsonModule": true,
+
+    /* Linting */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": [
+    "src",
+    "../frontuser/src/config/navigation.ts",
+    "../frontuser/src/i18n/content/fr/church.ts",
+    "../frontuser/src/data/parish.json",
+    "../frontuser/src/data/commissions.json",
+    "../frontuser/src/data/weekly-schedule.json",
+    "../frontuser/src/data/announcements.json",
+    "../frontuser/src/data/media.json",
+    "../frontuser/src/data/donations.json",
+    "../frontuser/src/data/liturgy.json",
+    "../frontuser/src/data/live.json"
+  ]
+}
