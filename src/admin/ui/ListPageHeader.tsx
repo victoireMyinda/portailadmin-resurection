@@ -3,15 +3,22 @@ import { Box, Typography, alpha } from '@mui/material'
 import { parishColors } from '../../theme/parishTheme'
 import { design } from '../../theme/design-tokens'
 
+export type ListPageHeaderBadge = {
+  label: string
+  count: number
+  emphasis?: 'default' | 'alert'
+}
+
 type ListPageHeaderProps = {
   title: string
   subtitle?: string
   icon: ReactNode
   count?: number
+  badges?: ListPageHeaderBadge[]
   actions?: ReactNode
 }
 
-export function ListPageHeader({ title, subtitle, icon, count, actions }: ListPageHeaderProps) {
+export function ListPageHeader({ title, subtitle, icon, count, badges, actions }: ListPageHeaderProps) {
   return (
     <Box
       sx={{
@@ -85,6 +92,27 @@ export function ListPageHeader({ title, subtitle, icon, count, actions }: ListPa
                 {count}
               </Typography>
             )}
+            {badges?.map((badge) => (
+              <Typography
+                key={badge.label}
+                component="span"
+                sx={{
+                  fontSize: '0.6875rem',
+                  fontWeight: 700,
+                  px: 1,
+                  py: 0.25,
+                  borderRadius: design.radius.pill,
+                  bgcolor:
+                    badge.emphasis === 'alert'
+                      ? alpha(parishColors.gold, 0.15)
+                      : alpha(parishColors.royal, 0.08),
+                  color: badge.emphasis === 'alert' ? '#92680a' : parishColors.royal,
+                  letterSpacing: '0.04em',
+                }}
+              >
+                {badge.count} {badge.label}
+              </Typography>
+            ))}
           </Box>
           {subtitle && (
             <Typography

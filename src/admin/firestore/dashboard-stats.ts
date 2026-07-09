@@ -1,6 +1,7 @@
 import { collection, doc, getDoc, getDocs } from 'firebase/firestore'
 import { firestore } from '../../firebase/app'
 import { isFirestorePermissionError } from './session'
+import { countUnreadVisitorMessages } from '../visitor-messages/unread-count'
 
 export type DashboardVisitStats = {
   total: number
@@ -33,6 +34,8 @@ const KPI_LABELS: Record<string, string> = {
   contacts: 'Contacts',
   socialNetworks: 'Réseaux sociaux',
   churchSections: 'Rubriques Église',
+  parishSecretaryVisits: 'Permanences secrétariat',
+  parishCurateVisits: 'Permanences Père Curé',
 }
 
 const KPI_RESOURCES = [
@@ -47,6 +50,8 @@ const KPI_RESOURCES = [
   'contacts',
   'socialNetworks',
   'churchSections',
+  'parishSecretaryVisits',
+  'parishCurateVisits',
 ] as const
 
 export async function loadDashboardStats(): Promise<DashboardStats> {
@@ -128,7 +133,7 @@ async function fetchResourceCounts(): Promise<Record<string, number>> {
 async function fetchUnreadMessages(): Promise<number> {
   try {
     const snap = await getDocs(collection(firestore, 'visitorMessages'))
-    return snap.docs.filter((d) => d.data().read !== true).length
+    return countUnreadVisitorMessages(snap.docs)
   } catch {
     return 0
   }

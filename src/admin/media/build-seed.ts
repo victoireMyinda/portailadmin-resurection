@@ -24,7 +24,18 @@ const imageByKey: Record<string, string> = {
   statutmarie,
 }
 
-export const mediaCategoryChoices = mediaData.categories.map((name) => ({ id: name, name }))
+export const MEDIA_ALL_CATEGORY = 'Tout'
+
+export const mediaCategoryChoices = mediaData.categories
+  .filter((name) => name !== MEDIA_ALL_CATEGORY)
+  .map((name) => ({ id: name, name }))
+
+export const mediaCategoryFilterChoices = mediaCategoryChoices
+
+export const mediaFilterPills = mediaData.categories.map((name) => ({
+  id: name === MEDIA_ALL_CATEGORY ? 'all' : name,
+  label: name,
+}))
 
 export function buildMediaPhotosSeed(): MediaPhotoRecord[] {
   return mediaData.photos.map((photo) => ({
@@ -43,6 +54,7 @@ export function buildMediaVideosSeed(): MediaVideoRecord[] {
     id: video.id,
     title: video.title,
     description: video.description,
+    category: video.category,
     youtubeId: video.youtubeId,
     order: video.order,
   }))

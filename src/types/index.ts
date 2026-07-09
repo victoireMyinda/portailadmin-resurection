@@ -239,7 +239,11 @@ export interface MediaVideoRecord {
   id: string
   title: string
   description: string
+  category?: string
   youtubeId: string
+  videoSource?: 'youtube' | 'url' | 'upload'
+  videoUrl?: string
+  thumbnailUrl?: string
   order: number
 }
 
@@ -282,6 +286,16 @@ export interface DonationPaymentMethodRecord {
   order: number
   imageUrl?: string
   imageSource?: 'url' | 'upload'
+}
+
+export interface ParishVisitRecord {
+  id: string
+  name: string
+  day: string
+  timeRange: string
+  location: string
+  phone: string
+  order: number
 }
 
 export type ParishUserRole = 'admin' | 'cure' | 'secretaire'
@@ -333,6 +347,8 @@ export type Database = {
   churchSections: ChurchSectionRecord[]
   donationSettings: DonationSettingsRecord[]
   donationPaymentMethods: DonationPaymentMethodRecord[]
+  parishSecretaryVisits: ParishVisitRecord[]
+  parishCurateVisits: ParishVisitRecord[]
   visitorMessages: VisitorMessageRecord[]
   parishUsers: ParishUserRecord[]
 }

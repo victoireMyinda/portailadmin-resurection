@@ -9,6 +9,7 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "firebase:deploy-rules": "firebase deploy --only firestore:rules,storage",
+    "firebase:deploy-functions": "firebase deploy --only functions",
     "firebase:deploy-storage": "firebase deploy --only storage",
     "firebase:setup-storage": "firebase deploy --only storage && node scripts/print-storage-cors.mjs"
   },

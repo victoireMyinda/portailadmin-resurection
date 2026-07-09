@@ -93,6 +93,22 @@ h1.RaList-title,
   padding: 0 !important;
 }
 
+.parish-login .RaLoginForm-content .MuiTextField-root {
+  margin-bottom: 0;
+}
+
+.parish-login .RaLoginForm-content .MuiOutlinedInput-root {
+  background-color: #f8fafc;
+}
+
+.parish-login .RaLoginForm-content .MuiOutlinedInput-root:hover {
+  background-color: #fff;
+}
+
+.parish-login .RaLoginForm-content .MuiOutlinedInput-root.Mui-focused {
+  background-color: #fff;
+}
+
 .RaSidebar-drawerPaper {
   border: none !important;
 }
@@ -101,8 +117,17 @@ h1.RaList-title,
   animation: dashboardFadeIn 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.dashboard-card {
+  animation: dashboardCardIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 @keyframes dashboardFadeIn {
   from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes dashboardCardIn {
+  from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 

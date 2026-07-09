@@ -1,8 +1,10 @@
 import type { ReactElement } from 'react'
-import { SearchInput, SelectInput, NullableBooleanInput } from 'react-admin'
+import { SelectInput, NullableBooleanInput } from 'react-admin'
+import { ParishSearchInput } from './parish-search-input'
+import { mediaCategoryFilterChoices } from '../media/build-seed'
 
 export const parishSearchFilter = (
-  <SearchInput source="q" alwaysOn key="parish-search" placeholder="Rechercher…" resettable />
+  <ParishSearchInput source="q" alwaysOn key="parish-search" placeholder="Rechercher…" resettable />
 )
 
 export function mergeParishFilters(extra: ReactElement[] = []): ReactElement[] {
@@ -74,5 +76,27 @@ export const parishUserActiveFilter = (
     nullLabel="Tous"
     falseLabel="Inactif"
     trueLabel="Actif"
+  />
+)
+
+export const mediaPhotoCategoryFilter = (
+  <SelectInput
+    source="category"
+    key="filter-media-category"
+    label="Catégorie"
+    choices={mediaCategoryFilterChoices}
+    alwaysOn
+    emptyText="Tout"
+  />
+)
+
+export const mediaVideoCategoryFilter = (
+  <SelectInput
+    source="category"
+    key="filter-media-video-category"
+    label="Catégorie"
+    choices={mediaCategoryFilterChoices}
+    alwaysOn
+    emptyText="Tout"
   />
 )

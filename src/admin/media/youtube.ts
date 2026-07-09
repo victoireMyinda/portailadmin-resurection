@@ -23,6 +23,8 @@ export function parseYoutubeId(input: string): string {
       const parts = url.pathname.split('/').filter(Boolean)
       const embedIdx = parts.indexOf('embed')
       if (embedIdx >= 0 && parts[embedIdx + 1]) return parts[embedIdx + 1]
+      const liveIdx = parts.indexOf('live')
+      if (liveIdx >= 0 && parts[liveIdx + 1]) return parts[liveIdx + 1] ?? ''
     }
   } catch {
     return value

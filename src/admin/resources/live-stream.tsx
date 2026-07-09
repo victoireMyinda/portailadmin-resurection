@@ -10,6 +10,7 @@ import {
 import { Hash, Link2, Radio, Settings, Tv, Type } from 'lucide-react'
 import { ParishSectionList } from '../ui/ParishSectionList'
 import { SingletonRecordList } from '../ui/SingletonRecordList'
+import { LiveEmbedUrlInput } from '../ui/LiveEmbedUrlInput'
 import { FormSection, ModernCreate, ModernEdit, ModernListShell } from '../ui/modern'
 
 const arrayIteratorSx = {
@@ -37,12 +38,12 @@ const settingsFormFields = (
       <TextInput source="featuredTitle" label="Titre affiché" validate={required()} fullWidth />
       <TextInput source="featuredDescription" label="Description" validate={required()} fullWidth multiline rows={2} />
       <TextInput source="featuredWatchUrl" label="Lien de visionnage" validate={required()} fullWidth />
-      <TextInput
-        source="featuredEmbedUrl"
+      <LiveEmbedUrlInput
+        embedSource="featuredEmbedUrl"
+        watchSource="featuredWatchUrl"
         label="URL d'intégration (iframe)"
         validate={required()}
-        fullWidth
-        helperText="Ex. https://www.youtube.com/embed/VIDEO_ID"
+        helperText="Remplie automatiquement pour YouTube (ex. watch?v=… → embed/…)."
       />
     </FormSection>
     <FormSection title="Prochaines diffusions" icon={<Radio size={20} />}>
@@ -113,13 +114,15 @@ const platformFormFields = (
         label="Lien de la page live"
         validate={required()}
         fullWidth
-        helperText="Page live YouTube / Facebook / TikTok"
+        helperText="Lien YouTube watch, youtu.be ou page live avec ID vidéo"
       />
-      <TextInput
-        source="embedUrl"
+      <LiveEmbedUrlInput
+        embedSource="embedUrl"
+        watchSource="watchUrl"
+        platformIdSource="id"
+        autoplayWhenLive
         label="URL d'intégration (iframe)"
-        fullWidth
-        helperText="Lecture directe sur le site quand LIVE. Laisser vide si non disponible (ex. Facebook, TikTok)."
+        helperText="YouTube : générée automatiquement. Facebook / TikTok : lecture sur le site si l’URL embed est fournie."
       />
     </FormSection>
     <FormSection title="Informations par défaut (hors live)" icon={<Type size={20} />}>

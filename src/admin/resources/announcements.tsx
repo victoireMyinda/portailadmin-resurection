@@ -41,7 +41,7 @@ export const weeklyAnnouncementResources = (
     list={
       <ModernListShell sort={{ field: 'order', order: 'ASC' }} perPage={50}>
         <ParishSectionList
-          title="Annonce de la semaine"
+          title="Annonce semaine"
           subtitle="Bulletin hebdomadaire — /annonces/semaine"
           icon={<Bell size={24} />}
           emptyTitle="Aucune annonce de la semaine"
@@ -55,7 +55,7 @@ export const weeklyAnnouncementResources = (
       </ModernListShell>
     }
     edit={
-      <ModernEdit title="Modifier l'annonce" subtitle="Annonce de la semaine">
+      <ModernEdit title="Modifier l'annonce" subtitle="Annonce semaine">
         <FormSection title="Identifiant" icon={<Hash size={20} />}>
           <TextInput source="id" label="Identifiant" disabled fullWidth />
         </FormSection>
@@ -63,7 +63,7 @@ export const weeklyAnnouncementResources = (
       </ModernEdit>
     }
     create={
-      <ModernCreate title="Nouvelle annonce" subtitle="Annonce de la semaine" defaultValues={{ order: 10, mediaType: 'none' }}>
+      <ModernCreate title="Nouvelle annonce" subtitle="Annonce semaine" defaultValues={{ order: 10, mediaType: 'none' }}>
         <FormSection title="Identifiant" icon={<Hash size={20} />}>
           <TextInput source="id" label="Identifiant" validate={required()} fullWidth />
         </FormSection>

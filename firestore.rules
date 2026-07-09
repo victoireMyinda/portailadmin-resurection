@@ -6,21 +6,25 @@ service cloud.firestore {
       return request.auth != null;
     }
 
+    // Création anonyme (portail public) : champs obligatoires uniquement, sans id dans le document.
     function isValidVisitorMessage() {
-      return request.resource.data.keys().hasOnly(['name', 'phone', 'message', 'createdAt', 'read'])
-        && request.resource.data.name is string
-        && request.resource.data.name.size() >= 2
-        && request.resource.data.name.size() <= 120
-        && request.resource.data.phone is string
-        && request.resource.data.phone.size() >= 6
-        && request.resource.data.phone.size() <= 40
-        && request.resource.data.message is string
-        && request.resource.data.message.size() >= 10
-        && request.resource.data.message.size() <= 2000
-        && request.resource.data.createdAt is string
-        && request.resource.data.read == false;
+      let data = request.resource.data;
+      return data.keys().hasOnly(['name', 'phone', 'message', 'createdAt', 'read'])
+        && data.name is string
+        && data.name.size() >= 2
+        && data.name.size() <= 120
+        && data.phone is string
+        && data.phone.size() >= 6
+        && data.phone.size() <= 40
+        && data.message is string
+        && data.message.size() >= 10
+        && data.message.size() <= 2000
+        && data.createdAt is string
+        && data.read is bool
+        && data.read == false;
     }
 
+    // Messages visiteurs : écriture publique (create), lecture/modif réservées aux admins connectés.
     match /visitorMessages/{messageId} {
       allow create: if isValidVisitorMessage();
       allow read, update, delete: if isSignedIn();

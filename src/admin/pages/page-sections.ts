@@ -69,7 +69,7 @@ export const pageSections: PageSection[] = [
   {
     id: 'parish',
     title: 'Notre Paroisse',
-    subtitle: 'Les 6 sous-onglets du menu paroissial',
+    subtitle: 'Historique, curés, messes, commissions et groupes',
     modules: [
       {
         to: '/parishHistorySections',
@@ -84,13 +84,6 @@ export const pageSections: PageSection[] = [
         description: 'Timeline des curés',
         icon: Church,
         color: '#7c2d12',
-      },
-      {
-        to: '/parishWeeklyDays',
-        title: 'Annonces semaine',
-        description: 'Programme par jour',
-        icon: Calendar,
-        color: '#0f766e',
       },
       {
         to: '/parishMassCategories',
@@ -113,16 +106,30 @@ export const pageSections: PageSection[] = [
         icon: Users,
         color: '#be185d',
       },
+      {
+        to: '/parishSecretaryVisits',
+        title: 'Visites Secrétariat',
+        description: 'Permanences du secrétariat paroissial',
+        icon: Clock,
+        color: '#0369a1',
+      },
+      {
+        to: '/parishCurateVisits',
+        title: 'Visites Père Curé',
+        description: 'Permanences du Père Curé',
+        icon: Church,
+        color: '#7c2d12',
+      },
     ],
   },
   {
     id: 'announcements',
     title: 'Annonces',
-    subtitle: 'Annonce de la semaine et toutes les annonces',
+    subtitle: 'Annonce semaine et toutes les annonces',
     modules: [
       {
         to: '/weeklyAnnouncements',
-        title: 'Annonce de la semaine',
+        title: 'Annonce semaine',
         description: 'Bulletin hebdomadaire du portail',
         icon: Bell,
         color: '#dc2626',

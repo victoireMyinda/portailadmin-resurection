@@ -1,3 +1,7 @@
+/**
+ * Collections Firestore gérées par frontadmin.
+ * Contrat partagé avec frontuser (lecture seule) — voir frontuser/src/firebase/cms-contract.ts
+ */
 export const RESOURCE_NAMES = [
   'contacts',
   'socialNetworks',
@@ -26,6 +30,8 @@ export const RESOURCE_NAMES = [
   'churchSections',
   'donationSettings',
   'donationPaymentMethods',
+  'parishSecretaryVisits',
+  'parishCurateVisits',
   'visitorMessages',
   'parishUsers',
 ] as const

@@ -7,8 +7,9 @@ import {
   Stack,
   Typography,
 } from '@mui/material'
-import { ChevronRight } from 'lucide-react'
+import { ChevronRight, Play } from 'lucide-react'
 import type { ReactNode } from 'react'
+import { useState } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import {
   CreateButton,
@@ -20,7 +21,8 @@ import {
 import { parishColors } from '../../theme/parishTheme'
 import { design } from '../../theme/design-tokens'
 import { EmptyState } from './EmptyState'
-import { ResourceListLayout } from './ResourceListLayout'
+import { ResourceListLayout, type ListPageHeaderBadge } from './ResourceListLayout'
+import { MediaCategoryPills, filterByMediaCategory } from './MediaCategoryPills'
 
 type ParishSectionListProps = {
   title: string
@@ -34,8 +36,15 @@ type ParishSectionListProps = {
   getCardSubtitle?: (record: Record<string, unknown>) => string
   getCardMeta?: (record: Record<string, unknown>) => string[]
   getCardImage?: (record: Record<string, unknown>) => string | undefined
+  cardActions?: (record: Record<string, unknown>) => ReactNode
+  isHighlighted?: (record: Record<string, unknown>) => boolean
+  headerBadges?: ListPageHeaderBadge[]
+  categoryFilterField?: string
   sortField?: string
   compact?: boolean
+  /** Grille visuelle : uniquement la vignette ; détails dans l’écran d’édition au clic */
+  imageOnly?: boolean
+  showPlayOverlay?: boolean
 }
 
 export function ParishSectionList({
@@ -50,11 +59,17 @@ export function ParishSectionList({
   getCardSubtitle,
   getCardMeta,
   getCardImage,
+  cardActions,
+  isHighlighted,
+  headerBadges,
+  categoryFilterField,
   sortField = 'order',
   compact = false,
+  imageOnly = false,
+  showPlayOverlay = false,
 }: ParishSectionListProps) {
   return (
-    <ResourceListLayout title={title} subtitle={subtitle} icon={icon}>
+    <ResourceListLayout title={title} subtitle={subtitle} icon={icon} badges={headerBadges}>
       <ParishSectionCardGrid
         emptyTitle={emptyTitle}
         emptyDescription={emptyDescription}
@@ -64,8 +79,13 @@ export function ParishSectionList({
         getCardSubtitle={getCardSubtitle}
         getCardMeta={getCardMeta}
         getCardImage={getCardImage}
+        cardActions={cardActions}
+        isHighlighted={isHighlighted}
+        categoryFilterField={categoryFilterField}
         sortField={sortField}
         compact={compact}
+        imageOnly={imageOnly}
+        showPlayOverlay={showPlayOverlay}
         icon={icon}
       />
     </ResourceListLayout>
@@ -83,19 +103,28 @@ function ParishSectionCardGrid({
   getCardSubtitle,
   getCardMeta,
   getCardImage,
+  cardActions,
+  isHighlighted,
+  categoryFilterField,
   sortField = 'order',
   compact = false,
+  imageOnly = false,
+  showPlayOverlay = false,
   icon,
 }: ParishSectionCardGridProps & { icon?: ReactNode }) {
   const { data, isLoading } = useListContext()
   const resource = useResourceContext()
   const createPath = useCreatePath()
+  const [selectedCategory, setSelectedCategory] = useState('all')
 
   if (isLoading) return <Loading />
 
-  const records = (data ?? []) as Record<string, unknown>[]
+  const allRecords = (data ?? []) as Record<string, unknown>[]
+  const records = categoryFilterField
+    ? filterByMediaCategory(allRecords, categoryFilterField, selectedCategory)
+    : allRecords
 
-  if (!records.length) {
+  if (!allRecords.length) {
     return (
       <EmptyState
         title={emptyTitle}
@@ -116,23 +145,39 @@ function ParishSectionCardGrid({
 
   return (
     <Box sx={{ width: '100%', maxWidth: '100%', minWidth: 0, overflow: 'hidden' }}>
+      {categoryFilterField && (
+        <MediaCategoryPills
+          value={selectedCategory}
+          onChange={setSelectedCategory}
+        />
+      )}
+      {records.length === 0 ? (
+        <Typography variant="body2" color="text.secondary" sx={{ py: 2 }}>
+          Aucun élément dans cette catégorie.
+        </Typography>
+      ) : (
       <Box
         sx={{
           display: 'grid',
-          gridTemplateColumns: compact
-            ? 'repeat(auto-fill, minmax(min(100%, 200px), 1fr))'
-            : 'repeat(auto-fill, minmax(min(100%, 260px), 1fr))',
-          gap: compact ? 1.5 : 2,
+          gridTemplateColumns: imageOnly
+            ? 'repeat(auto-fill, minmax(min(100%, 140px), 1fr))'
+            : compact
+              ? 'repeat(auto-fill, minmax(min(100%, 200px), 1fr))'
+              : 'repeat(auto-fill, minmax(min(100%, 260px), 1fr))',
+          gap: imageOnly ? 1 : compact ? 1.5 : 2,
         }}
       >
       {sorted.map((record) => {
         const to = createPath({ resource, id: String(record.id), type: 'edit' })
         const meta = getCardMeta?.(record) ?? []
+        const highlighted = isHighlighted?.(record) ?? false
+        const imageSrc = getCardImage?.(record)
 
         return (
           <RouterLink
             key={String(record.id)}
             to={to}
+            aria-label={getCardTitle(record)}
             style={{ textDecoration: 'none', color: 'inherit', minWidth: 0 }}
           >
             <Card
@@ -140,18 +185,74 @@ function ParishSectionCardGrid({
               sx={{
                 height: '100%',
                 borderRadius: `${design.radius.lg}px`,
-                border: `1px solid ${design.border}`,
-                boxShadow: design.shadow.xs,
-                transition: 'box-shadow 0.2s ease, border-color 0.2s ease',
+                border: highlighted
+                  ? `1px solid ${parishColors.gold}`
+                  : `1px solid ${design.border}`,
+                boxShadow: highlighted ? design.shadow.sm : design.shadow.xs,
+                transition: 'box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease',
                 minWidth: 0,
                 overflow: 'hidden',
                 '&:hover': {
                   boxShadow: design.shadow.md,
                   borderColor: design.borderStrong,
+                  ...(imageOnly ? { transform: 'scale(1.02)' } : {}),
                 },
               }}
             >
-              {getCardImage?.(record) && (
+              {imageOnly ? (
+                <Box
+                  sx={{
+                    position: 'relative',
+                    aspectRatio: showPlayOverlay ? '16 / 9' : '1 / 1',
+                    bgcolor: design.surfaceMuted,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  {imageSrc ? (
+                    <Box
+                      component="img"
+                      src={imageSrc}
+                      alt=""
+                      sx={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                    />
+                  ) : (
+                    <Box sx={{ color: parishColors.mutedForeground, opacity: 0.5 }}>
+                      {showPlayOverlay ? <Play size={32} /> : null}
+                    </Box>
+                  )}
+                  {showPlayOverlay && imageSrc && (
+                    <Box
+                      sx={{
+                        position: 'absolute',
+                        inset: 0,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        bgcolor: 'rgba(0,0,0,0.25)',
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          width: 40,
+                          height: 40,
+                          borderRadius: '50%',
+                          bgcolor: parishColors.gold,
+                          color: parishColors.foreground,
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <Play size={18} fill="currentColor" />
+                      </Box>
+                    </Box>
+                  )}
+                </Box>
+              ) : (
+                <>
+              {imageSrc && (
                 <Box
                   sx={{
                     height: compact ? 72 : 88,
@@ -165,7 +266,7 @@ function ParishSectionCardGrid({
                 >
                   <Box
                     component="img"
-                    src={getCardImage(record)}
+                    src={imageSrc}
                     alt=""
                     sx={{ maxHeight: '100%', maxWidth: '80%', objectFit: 'contain' }}
                   />
@@ -242,12 +343,16 @@ function ParishSectionCardGrid({
                     ))}
                   </Box>
                 )}
+                {cardActions?.(record)}
               </CardContent>
+                </>
+              )}
             </Card>
           </RouterLink>
         )
       })}
       </Box>
+      )}
     </Box>
   )
 }

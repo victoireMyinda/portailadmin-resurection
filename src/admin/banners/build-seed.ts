@@ -28,7 +28,7 @@ const entries: BannerSeed[] = [
   },
   {
     id: 'parish-weekly',
-    pagePath: '/notre-paroisse/annonces-semaine',
+    pagePath: '/annonces/semaine',
     title: 'Annonces de la semaine',
     description: 'Programme de la semaine paroissiale.',
     imageUrl: fidele,
@@ -62,7 +62,7 @@ const entries: BannerSeed[] = [
   {
     id: 'announcements-weekly',
     pagePath: '/annonces/semaine',
-    title: 'Annonce de la semaine',
+    title: 'Annonce semaine',
     description: 'Bulletin hebdomadaire de la paroisse.',
     imageUrl: fidele,
     order: 65,
@@ -132,6 +132,14 @@ const entries: BannerSeed[] = [
     description: 'Nous sommes à votre écoute.',
     imageUrl: paroisse,
     order: 160,
+  },
+  {
+    id: 'visits-hours',
+    pagePath: '/visites-horaires',
+    title: 'Visites & Horaires',
+    description: 'Permanences du secrétariat et du Père Curé.',
+    imageUrl: eglise,
+    order: 165,
   },
   // Tout sur l'Église
   {

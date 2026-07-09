@@ -359,7 +359,7 @@ export function ModernCreate({ title, subtitle, children, defaultValues }: FormP
   )
 }
 
-function FormPageShell({ title, subtitle, children }: FormPageProps) {
+export function FormPageShell({ title, subtitle, children }: FormPageProps) {
   const resource = useResourceContext()
   const hubBack = resource ? getPageHubBackTarget(resource) : null
 

@@ -3,7 +3,7 @@ import { useListContext, useResourceContext } from 'react-admin'
 import { Box, Button } from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
-import { ListPageHeader } from './ListPageHeader'
+import { ListPageHeader, type ListPageHeaderBadge } from './ListPageHeader'
 import { ListActionsBar } from './ListActionsBar'
 import { getPageHubBackTarget } from '../navigation/page-routes'
 import { parishColors } from '../../theme/parishTheme'
@@ -14,6 +14,7 @@ type ResourceListLayoutProps = {
   subtitle?: string
   icon: ReactNode
   showFilters?: boolean
+  badges?: ListPageHeaderBadge[]
   children: ReactNode
 }
 
@@ -22,6 +23,7 @@ export function ResourceListLayout({
   subtitle,
   icon,
   showFilters = false,
+  badges,
   children,
 }: ResourceListLayoutProps) {
   const { total, isLoading } = useListContext()
@@ -56,9 +58,12 @@ export function ResourceListLayout({
         subtitle={subtitle}
         icon={icon}
         count={isLoading ? undefined : total}
+        badges={badges}
         actions={<ListActionsBar showFilters={showFilters} />}
       />
       {children}
     </Box>
   )
 }
+
+export type { ListPageHeaderBadge } from './ListPageHeader'

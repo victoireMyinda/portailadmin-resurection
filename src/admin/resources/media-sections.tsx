@@ -1,18 +1,13 @@
-import {
-  AutocompleteArrayInput,
-  NumberInput,
-  ReferenceArrayInput,
-  Resource,
-  SelectInput,
-  TextInput,
-  required,
-} from 'react-admin'
+import { AutocompleteArrayInput, NumberInput, ReferenceArrayInput, Resource, SelectInput, TextInput, required } from 'react-admin'
 import { FileText, FolderOpen, Hash, Image as ImageIcon, Images, Play, Type } from 'lucide-react'
 import { ParishSectionList } from '../ui/ParishSectionList'
 import { PhotoSourceInput } from '../ui/CompressedImageInput'
 import { MediaVideoPreviewLive } from '../ui/MediaVideoPreview'
+import { VideoSourceInput } from '../ui/VideoSourceInput'
 import { FormSection, ModernCreate, ModernEdit, ModernListShell } from '../ui/modern'
+import { PhotoBatchCreatePage, VideoBatchCreatePage } from '../media/media-batch-create'
 import { mediaCategoryChoices } from '../media/build-seed'
+import { parseYoutubeId, resolveYoutubeUrls } from '../media/youtube'
 
 export const mediaAlbumResources = (
   <Resource
@@ -79,17 +74,18 @@ export const mediaPhotoResources = (
       <ModernListShell sort={{ field: 'order', order: 'ASC' }} perPage={50}>
         <ParishSectionList
           title="Photos"
-          subtitle="Galerie compressée WebP — onglet Photos"
+          subtitle="Galerie — comme sur le portail public"
           icon={<ImageIcon size={24} />}
           emptyTitle="Aucune photo"
           emptyDescription="Ajoutez des photos à la galerie paroissiale."
           createLabel="Ajouter une photo"
+          categoryFilterField="category"
           getCardTitle={(r) => String(r.title ?? '—')}
-          getCardSubtitle={(r) => String(r.category ?? '')}
-          getCardMeta={(r) => [
-            r.imageSource === 'upload' ? 'Import appareil' : 'Lien en ligne',
-            `Ordre ${r.order ?? 0}`,
-          ]}
+          getCardImage={(r) => {
+            const src = String(r.thumbnailUrl || r.imageUrl || '')
+            return src || undefined
+          }}
+          imageOnly
           compact
         />
       </ModernListShell>
@@ -110,23 +106,7 @@ export const mediaPhotoResources = (
       </ModernEdit>
     }
     create={
-      <ModernCreate
-        title="Nouvelle photo"
-        subtitle="Lien en ligne ou import depuis l'appareil"
-        defaultValues={{ order: 10, imageSource: 'url' }}
-      >
-        <FormSection title="Identifiant" icon={<Hash size={20} />}>
-          <TextInput source="id" label="Identifiant" validate={required()} fullWidth helperText="Ex. 11, grotte-2026" />
-          <NumberInput source="order" label="Ordre" validate={required()} fullWidth />
-        </FormSection>
-        <FormSection title="Informations" icon={<Type size={20} />}>
-          <TextInput source="title" label="Titre" validate={required()} fullWidth />
-          <SelectInput source="category" label="Catégorie" choices={mediaCategoryChoices} validate={required()} fullWidth />
-        </FormSection>
-        <FormSection title="Source de l'image" icon={<ImageIcon size={20} />}>
-          <PhotoSourceInput label="Photo de la galerie" />
-        </FormSection>
-      </ModernCreate>
+      <PhotoBatchCreatePage />
     }
     recordRepresentation="title"
     options={{ label: 'Photos' }}
@@ -140,33 +120,39 @@ export const mediaVideoResources = (
       <ModernListShell sort={{ field: 'order', order: 'ASC' }} perPage={50}>
         <ParishSectionList
           title="Vidéos"
-          subtitle="Liens YouTube uniquement — onglet Vidéos"
+          subtitle="Galerie — comme sur le portail public"
           icon={<Play size={24} />}
           emptyTitle="Aucune vidéo"
-          emptyDescription="Ajoutez des liens YouTube (pas de fichier vidéo)."
+          emptyDescription="Ajoutez des vidéos via YouTube, URL directe ou téléversement."
           createLabel="Ajouter une vidéo"
+          categoryFilterField="category"
           getCardTitle={(r) => String(r.title ?? '—')}
-          getCardSubtitle={(r) => String(r.description ?? '').slice(0, 80)}
-          getCardMeta={(r) => [r.youtubeId ? `YouTube: ${r.youtubeId}` : 'À venir']}
+          getCardImage={(r) => {
+            const thumb = String(r.thumbnailUrl ?? '').trim()
+            if (thumb) return thumb
+            const yt = parseYoutubeId(String(r.youtubeId ?? ''))
+            if (yt) return resolveYoutubeUrls(yt).thumbnail
+            return undefined
+          }}
+          imageOnly
+          showPlayOverlay
           compact
         />
       </ModernListShell>
     }
     edit={
-      <ModernEdit title="Modifier la vidéo" subtitle="Lien YouTube">
+      <ModernEdit title="Modifier la vidéo" subtitle="Source YouTube, lien direct ou téléversement">
         <FormSection title="Identifiant" icon={<Hash size={20} />}>
           <TextInput source="id" label="Identifiant" disabled fullWidth />
           <NumberInput source="order" label="Ordre d'affichage" validate={required()} fullWidth />
         </FormSection>
-        <FormSection title="Vidéo YouTube" icon={<Play size={20} />}>
-          <TextInput
-            source="youtubeId"
-            label="ID ou lien YouTube"
-            fullWidth
-            helperText="Ex. FxMDSUhFgSk ou https://www.youtube.com/watch?v=… — aucun fichier vidéo n'est stocké"
-          />
+        <FormSection title="Informations" icon={<Type size={20} />}>
           <TextInput source="title" label="Titre affiché" validate={required()} fullWidth />
-          <TextInput source="description" label="Description courte" validate={required()} fullWidth multiline rows={2} />
+          <SelectInput source="category" label="Catégorie" choices={mediaCategoryChoices} validate={required()} fullWidth />
+          <TextInput source="description" label="Description courte" fullWidth multiline rows={2} />
+        </FormSection>
+        <FormSection title="Source de la vidéo" icon={<Play size={20} />}>
+          <VideoSourceInput />
         </FormSection>
         <FormSection title="Aperçu" icon={<FileText size={20} />}>
           <MediaVideoPreviewLive />
@@ -174,20 +160,7 @@ export const mediaVideoResources = (
       </ModernEdit>
     }
     create={
-      <ModernCreate title="Nouvelle vidéo" subtitle="Lien YouTube" defaultValues={{ order: 10 }}>
-        <FormSection title="Identifiant" icon={<Hash size={20} />}>
-          <TextInput source="id" label="Identifiant" validate={required()} fullWidth />
-          <NumberInput source="order" label="Ordre" validate={required()} fullWidth />
-        </FormSection>
-        <FormSection title="Vidéo YouTube" icon={<Play size={20} />}>
-          <TextInput source="youtubeId" label="ID ou lien YouTube" fullWidth />
-          <TextInput source="title" label="Titre" validate={required()} fullWidth />
-          <TextInput source="description" label="Description" validate={required()} fullWidth multiline rows={2} />
-        </FormSection>
-        <FormSection title="Aperçu" icon={<FileText size={20} />}>
-          <MediaVideoPreviewLive />
-        </FormSection>
-      </ModernCreate>
+      <VideoBatchCreatePage />
     }
     recordRepresentation="title"
     options={{ label: 'Vidéos' }}

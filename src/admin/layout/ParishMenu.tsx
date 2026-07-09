@@ -1,6 +1,7 @@
 import { Menu, MenuItemLink, DashboardMenuItem } from 'react-admin'
 import { Typography } from '@mui/material'
-import { MapPin, Share2, Inbox, UserCog, Settings } from 'lucide-react'
+import { MapPin, Share2, UserCog, Settings, Bell, BookOpen, Cross, Calendar, Radio } from 'lucide-react'
+import { VisitorMessagesMenuItem } from './VisitorMessagesMenuItem'
 import { design } from '../../theme/design-tokens'
 import { PagesMenuItem } from './PagesMenuItem'
 import { SidebarBrand } from './SidebarBrand'
@@ -33,6 +34,33 @@ export function ParishMenu() {
       <DashboardMenuItem sx={{ borderRadius: `${design.radius.sm}px`, mx: 1.25 }} />
       <PagesMenuItem />
 
+      <MenuGroup label="Raccourcis rapides" />
+      <MenuItemLink
+        to="/weeklyAnnouncements"
+        primaryText="Annonce semaine"
+        leftIcon={<Bell size={18} strokeWidth={1.75} />}
+      />
+      <MenuItemLink
+        to="/parishAnnouncements"
+        primaryText="Toutes les annonces"
+        leftIcon={<Calendar size={18} strokeWidth={1.75} />}
+      />
+      <MenuItemLink
+        to="/liveStreamSettings"
+        primaryText="Messe en direct"
+        leftIcon={<Radio size={18} strokeWidth={1.75} />}
+      />
+      <MenuItemLink
+        to="/liturgyHomily"
+        primaryText="Homélie du jour"
+        leftIcon={<BookOpen size={18} strokeWidth={1.75} />}
+      />
+      <MenuItemLink
+        to="/liturgyDaily"
+        primaryText="Parole et Saint du jour"
+        leftIcon={<Cross size={18} strokeWidth={1.75} />}
+      />
+
       <MenuGroup label="Informations" />
       <MenuItemLink to="/contacts" primaryText="Contacts" leftIcon={<MapPin size={18} strokeWidth={1.75} />} />
       <MenuItemLink
@@ -42,7 +70,7 @@ export function ParishMenu() {
       />
 
       <MenuGroup label="Administration" />
-      <MenuItemLink to="/visitorMessages" primaryText="Messages" leftIcon={<Inbox size={18} strokeWidth={1.75} />} />
+      <VisitorMessagesMenuItem />
       <MenuItemLink
         to="/parishUsers"
         primaryText="Utilisateurs"

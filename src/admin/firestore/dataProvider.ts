@@ -41,6 +41,10 @@ import {
   sanitizeForFirestore,
   type StoredRecord,
 } from './utils'
+import {
+  normalizeLiveStreamPlatformRecord,
+  normalizeLiveStreamSettingsRecord,
+} from '../live-stream/live-embed'
 
 export { resetFirestoreSession }
 
@@ -115,6 +119,12 @@ async function fetchCollection(resource: string): Promise<StoredRecord[]> {
   return snap.docs.map((document) => ({ id: document.id, ...document.data() }) as StoredRecord)
 }
 
+function normalizeBeforeSave(resource: string, data: Record<string, unknown>): Record<string, unknown> {
+  if (resource === 'liveStreamPlatforms') return normalizeLiveStreamPlatformRecord(data)
+  if (resource === 'liveStreamSettings') return normalizeLiveStreamSettingsRecord(data)
+  return data
+}
+
 export const firestoreDataProvider = {
   getList: async (resource, params: GetListParams) => {
     try {
@@ -182,9 +192,13 @@ export const firestoreDataProvider = {
         })
         return { data: record as unknown as StoredRecord }
       }
-      const id = String(params.data.id ?? `${resource}-${Date.now()}`)
-      const record = sanitizeForFirestore({ ...params.data, id }) as StoredRecord
-      await setDoc(doc(firestore, resource, id), record)
+      const { id: rawId, ...rest } = params.data as Record<string, unknown>
+      const id = String(rawId ?? `${resource}-${Date.now()}`)
+      const normalized = normalizeBeforeSave(resource, { ...rest, id })
+      const record = sanitizeForFirestore(normalized) as StoredRecord
+      const payload = sanitizeForFirestore({ ...rest, ...normalized })
+      delete (payload as Record<string, unknown>).id
+      await setDoc(doc(firestore, resource, id), payload)
       return { data: record }
     } catch (error) {
       throw wrapFirestoreError(error)
@@ -195,12 +209,12 @@ export const firestoreDataProvider = {
     await ensureReady()
     const id = String(params.id)
     const { password: _password, ...rest } = params.data as Record<string, unknown>
-    const record = sanitizeForFirestore({
-      ...params.previousData,
-      ...rest,
-      id,
-    }) as StoredRecord
-    await setDoc(doc(firestore, resource, id), record, { merge: true })
+    const merged = { ...params.previousData, ...rest, id }
+    const normalized = normalizeBeforeSave(resource, merged as Record<string, unknown>)
+    const record = sanitizeForFirestore(normalized) as StoredRecord
+    const payload = sanitizeForFirestore(normalized)
+    delete (payload as Record<string, unknown>).id
+    await setDoc(doc(firestore, resource, id), payload, { merge: true })
     return { data: record }
   },
 

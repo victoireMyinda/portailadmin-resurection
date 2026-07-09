@@ -18,10 +18,11 @@ import {
   homeAboutResources,
   parishHistoryResources,
   parishCurateResources,
-  parishWeeklyResources,
   parishMassResources,
   parishCommissionResources,
   parishGroupResources,
+  parishSecretaryVisitResources,
+  parishCurateVisitResources,
   weeklyAnnouncementResources,
   parishAnnouncementResources,
   liturgyCalendarResources,
@@ -62,7 +63,6 @@ export function AdminApp() {
       {homeAboutResources}
       {parishHistoryResources}
       {parishCurateResources}
-      {parishWeeklyResources}
       {parishMassResources}
       {parishCommissionResources}
       {parishGroupResources}
@@ -79,6 +79,8 @@ export function AdminApp() {
       {churchSectionResources}
       {donationSettingsResources}
       {donationPaymentMethodResources}
+      {parishSecretaryVisitResources}
+      {parishCurateVisitResources}
       {visitorMessageResources}
       {parishUserResources}
       <CustomRoutes>

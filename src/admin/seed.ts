@@ -25,6 +25,7 @@ import { buildLiveStreamPlatformsSeed, buildLiveStreamSettingsSeed } from './liv
 import { buildMediaAlbumsSeed, buildMediaPhotosSeed, buildMediaVideosSeed } from './media/build-seed'
 import { buildChurchSectionsSeed } from './church/build-seed'
 import { buildDonationPaymentMethodsSeed, buildDonationSettingsSeed } from './donations/build-seed'
+import { buildParishCurateVisitsSeed, buildParishSecretaryVisitsSeed } from './visits/build-seed'
 
 export function buildSeedDatabase(): Database {
   return {
@@ -110,6 +111,8 @@ export function buildSeedDatabase(): Database {
     churchSections: buildChurchSectionsSeed(),
     donationSettings: buildDonationSettingsSeed(),
     donationPaymentMethods: buildDonationPaymentMethodsSeed(),
+    parishSecretaryVisits: buildParishSecretaryVisitsSeed(),
+    parishCurateVisits: buildParishCurateVisitsSeed(),
     visitorMessages: [],
     parishUsers: [],
   }

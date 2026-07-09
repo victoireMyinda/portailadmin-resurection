@@ -10,6 +10,12 @@ export type UploadPhotoResult = {
   storage: 'firebase' | 'inline'
 }
 
+export type UploadVideoResult = {
+  videoUrl: string
+  originalSize: number
+  storage: 'firebase'
+}
+
 const MAX_INLINE_DATA_URL_CHARS = 900_000
 
 async function ensureStorageAuth(): Promise<void> {
@@ -61,6 +67,16 @@ async function uploadToFirebaseStorage(
   }
 }
 
+async function uploadBinaryToFirebaseStorage(
+  storagePath: string,
+  file: Blob,
+  contentType: string,
+): Promise<string> {
+  const fileRef = ref(storage, storagePath)
+  await uploadBytes(fileRef, file, { contentType })
+  return getDownloadURL(fileRef)
+}
+
 async function storeInline(full: Blob, thumb: Blob): Promise<{ imageUrl: string; thumbnailUrl: string }> {
   const [imageUrl, thumbnailUrl] = await Promise.all([blobToDataUrl(full), blobToDataUrl(thumb)])
 
@@ -92,6 +108,24 @@ export async function uploadCompressedPhoto(photoId: string, file: File): Promis
 
     const urls = await storeInline(full, thumb)
     return { ...urls, originalSize, compressedSize, storage: 'inline' }
+  }
+}
+
+export async function uploadVideoFile(videoId: string, file: File): Promise<UploadVideoResult> {
+  await ensureStorageAuth()
+
+  const safeId = videoId.replace(/[^a-zA-Z0-9_-]/g, '_')
+  const extension = file.name.split('.').pop()?.toLowerCase() || 'mp4'
+  const contentType = file.type || 'video/mp4'
+
+  try {
+    const videoUrl = await uploadBinaryToFirebaseStorage(`media/videos/${safeId}/source.${extension}`, file, contentType)
+    return { videoUrl, originalSize: file.size, storage: 'firebase' }
+  } catch (error) {
+    if (!isStorageTransportError(error)) {
+      throw error instanceof Error ? error : new Error("Import de la vidéo impossible.")
+    }
+    throw new Error('Firebase Storage est requis pour téléverser des vidéos.')
   }
 }
 

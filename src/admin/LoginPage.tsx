@@ -1,8 +1,11 @@
-import { Login, LoginForm } from 'react-admin'
-import { Box, Typography } from '@mui/material'
+import { Login, LoginForm, TextInput, PasswordInput } from 'react-admin'
+import { Box, Typography, Divider } from '@mui/material'
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
+import { required } from 'ra-core'
 import parishLogo from '@frontuser/assets/paroisse.webp'
 import { parishColors } from '../theme/parishTheme'
 import { design } from '../theme/design-tokens'
+import { brand } from '../theme/brand'
 
 export function ParishLoginPage() {
   return (
@@ -11,108 +14,220 @@ export function ParishLoginPage() {
       sx={{
         minHeight: '100vh',
         display: 'flex',
-        alignItems: 'stretch',
-        background: design.canvas,
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative',
+        overflow: 'hidden',
+        backgroundImage: `url(${parishLogo})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        '&::before': {
+          content: '""',
+          position: 'absolute',
+          inset: 0,
+          background: `
+            linear-gradient(135deg, rgba(12, 25, 41, 0.5) 0%, rgba(13, 71, 161, 0.38) 50%, rgba(238, 241, 246, 0.22) 100%),
+            radial-gradient(ellipse 70% 55% at 50% 100%, rgba(212, 175, 55, 0.15) 0%, transparent 55%)
+          `,
+          pointerEvents: 'none',
+        },
         '& .RaLogin-main': {
           minHeight: '100vh',
           width: '100%',
           display: 'flex',
-          alignItems: 'stretch',
+          alignItems: 'center',
           justifyContent: 'center',
-          p: 0,
+          p: { xs: 2, sm: 3 },
         },
         '& .RaLogin-card': {
-          display: 'flex',
-          flexDirection: { xs: 'column', md: 'row' },
+          position: 'relative',
           width: '100%',
-          maxWidth: 920,
-          minHeight: { md: 520 },
+          maxWidth: 440,
+          marginTop: 0,
           borderRadius: `${design.radius.xl}px`,
           border: `1px solid ${design.border}`,
-          boxShadow: design.shadow.lg,
+          boxShadow: `${design.shadow.lg}, 0 0 0 1px rgba(255, 255, 255, 0.6) inset`,
           overflow: 'hidden',
-          m: { xs: 2, md: 3 },
+          background: 'rgba(255, 255, 255, 0.92)',
+          backdropFilter: 'blur(20px)',
+          animation: 'loginCardIn 0.55s cubic-bezier(0.22, 1, 0.36, 1)',
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            height: 4,
+            background: `linear-gradient(90deg, ${brand.goldDark} 0%, ${brand.gold} 50%, ${brand.goldDark} 100%)`,
+          },
         },
         '& .RaLogin-avatar': { display: 'none' },
-        '& .MuiCardContent-root': { p: 0, '&:last-child': { pb: 0 } },
+        '& .MuiCardContent-root': {
+          p: 0,
+          '&:last-child': { pb: 0 },
+        },
+        '& .RaLoginForm-content': {
+          width: '100%',
+          px: { xs: 3, sm: 4 },
+          pt: 1,
+          pb: { xs: 3, sm: 4 },
+        },
+        '& .MuiFormControl-root': {
+          width: '100%',
+          mb: 2,
+        },
         '& .MuiButton-containedPrimary': {
-          background: `linear-gradient(180deg, #1565C0 0%, #0D47A1 100%)`,
-          color: '#fff',
+          mt: 1,
+          py: 1.35,
+          fontSize: '0.9375rem',
           fontWeight: 700,
-          borderRadius: `${design.radius.sm}px`,
-          py: 1.25,
+          letterSpacing: '0.01em',
+          background: `linear-gradient(180deg, ${brand.royalLight} 0%, ${brand.royal} 100%)`,
+          boxShadow: '0 4px 14px rgba(13, 71, 161, 0.25)',
           '&:hover': {
-            background: `linear-gradient(180deg, #0D47A1 0%, #0a3d8f 100%)`,
+            background: `linear-gradient(180deg, ${brand.royal} 0%, ${brand.royalDark} 100%)`,
+            boxShadow: '0 6px 20px rgba(13, 71, 161, 0.3)',
           },
+        },
+        '@keyframes loginCardIn': {
+          from: { opacity: 0, transform: 'translateY(16px) scale(0.98)' },
+          to: { opacity: 1, transform: 'translateY(0) scale(1)' },
         },
       }}
     >
-      <Box
-        sx={{
-          flex: 1,
-          display: { xs: 'none', md: 'flex' },
-          flexDirection: 'column',
-          justifyContent: 'center',
-          p: 5,
-          background: design.sidebarGradient,
-          color: '#fff',
-        }}
-      >
+      <Box sx={{ width: '100%' }}>
         <Box
-          component="img"
-          src={parishLogo}
-          alt="Paroisse de la Résurrection"
           sx={{
-            width: 80,
-            height: 80,
-            borderRadius: '50%',
-            objectFit: 'cover',
-            border: `3px solid ${parishColors.gold}`,
-            mb: 3,
-          }}
-        />
-        <Typography
-          variant="h4"
-          sx={{
-            fontFamily: '"Playfair Display", Georgia, serif',
-            fontWeight: 700,
-            lineHeight: 1.2,
-            letterSpacing: '-0.02em',
+            textAlign: 'center',
+            px: { xs: 3, sm: 4 },
+            pt: { xs: 4, sm: 4.5 },
+            pb: 2,
           }}
         >
-          Paroisse de la Résurrection
-        </Typography>
-        <Typography sx={{ mt: 1.5, color: 'rgba(255,255,255,0.75)', maxWidth: 320, lineHeight: 1.6 }}>
-          Espace sécurisé de gestion du portail paroissial — Lemba Salongo, Kinshasa.
-        </Typography>
-      </Box>
-
-      <Box sx={{ flex: 1, p: { xs: 3, sm: 4 }, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-        <Box sx={{ display: { xs: 'block', md: 'none' }, textAlign: 'center', mb: 3 }}>
           <Box
-            component="img"
-            src={parishLogo}
-            alt=""
             sx={{
-              width: 64,
-              height: 64,
-              borderRadius: '50%',
-              objectFit: 'cover',
-              border: `2px solid ${parishColors.gold}`,
-              mb: 1.5,
+              position: 'relative',
+              display: 'inline-flex',
+              mb: 2.5,
             }}
-          />
-          <Typography variant="h6" sx={{ fontFamily: '"Playfair Display", serif', fontWeight: 700, color: parishColors.foreground }}>
-            Administration
+          >
+            <Box
+              sx={{
+                position: 'absolute',
+                inset: -6,
+                borderRadius: '50%',
+                background: `radial-gradient(circle, ${parishColors.goldMuted} 0%, transparent 70%)`,
+              }}
+            />
+            <Box
+              component="img"
+              src={parishLogo}
+              alt="Paroisse de la Résurrection"
+              sx={{
+                position: 'relative',
+                width: 88,
+                height: 88,
+                borderRadius: '50%',
+                objectFit: 'cover',
+                border: `3px solid ${parishColors.gold}`,
+                boxShadow: '0 8px 24px rgba(13, 71, 161, 0.15)',
+              }}
+            />
+          </Box>
+
+          <Typography
+            variant="overline"
+            sx={{
+              display: 'block',
+              color: parishColors.gold,
+              fontWeight: 700,
+              letterSpacing: '0.14em',
+              mb: 0.75,
+            }}
+          >
+            Espace administration
           </Typography>
+
+          <Typography
+            variant="h5"
+            sx={{
+              fontFamily: '"Playfair Display", Georgia, serif',
+              fontWeight: 700,
+              color: parishColors.foreground,
+              lineHeight: 1.25,
+              letterSpacing: '-0.02em',
+            }}
+          >
+            Paroisse de la Résurrection
+          </Typography>
+
+          <Typography
+            variant="body2"
+            sx={{
+              mt: 1,
+              color: parishColors.mutedForeground,
+              lineHeight: 1.55,
+            }}
+          >
+            Lemba Salongo — Kinshasa
+          </Typography>
+
+          <Divider
+            sx={{
+              mt: 2.5,
+              mb: 0.5,
+              borderColor: design.border,
+              '&::before, &::after': {
+                borderColor: design.border,
+              },
+            }}
+          >
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 0.75,
+                color: parishColors.mutedForeground,
+                fontSize: '0.75rem',
+                fontWeight: 600,
+              }}
+            >
+              <LockOutlinedIcon sx={{ fontSize: 16 }} />
+              Connexion sécurisée
+            </Box>
+          </Divider>
         </Box>
-        <Typography variant="h5" sx={{ fontWeight: 700, color: parishColors.foreground, mb: 0.5, display: { xs: 'none', md: 'block' } }}>
-          Connexion
+
+        <LoginForm>
+          <TextInput
+            autoFocus
+            source="username"
+            label="Adresse e-mail"
+            autoComplete="username"
+            validate={required()}
+          />
+          <PasswordInput
+            source="password"
+            label="Mot de passe"
+            autoComplete="current-password"
+            validate={required()}
+          />
+        </LoginForm>
+
+        <Typography
+          variant="caption"
+          sx={{
+            display: 'block',
+            textAlign: 'center',
+            px: 4,
+            pb: 3,
+            color: parishColors.mutedForeground,
+            lineHeight: 1.5,
+          }}
+        >
+          Accès réservé aux responsables paroissiaux autorisés.
         </Typography>
-        <Typography variant="body2" sx={{ color: parishColors.mutedForeground, mb: 3 }}>
-          Identifiants Firebase (e-mail et mot de passe)
-        </Typography>
-        <LoginForm />
       </Box>
     </Login>
   )

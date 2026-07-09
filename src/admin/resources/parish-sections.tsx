@@ -143,68 +143,6 @@ export const parishCurateResources = (
   />
 )
 
-export const parishWeeklyResources = (
-  <Resource
-    name="parishWeeklyDays"
-    list={
-      <ModernListShell sort={{ field: 'order', order: 'ASC' }} perPage={20}>
-        <ParishSectionList
-          title="Annonces de la semaine"
-          subtitle="Programme par jour — /notre-paroisse/annonces-semaine"
-          icon={<Calendar size={24} />}
-          emptyTitle="Aucun jour configuré"
-          emptyDescription="Configurez le programme hebdomadaire par jour."
-          createLabel="Ajouter un jour"
-          getCardTitle={(r) => String(r.dayLabel ?? '—')}
-          getCardMeta={(r) => [`${(r.activities as unknown[])?.length ?? 0} activités`]}
-        />
-      </ModernListShell>
-    }
-    edit={
-      <ModernEdit title="Modifier le jour" subtitle="Annonces de la semaine">
-        <FormSection title="Jour" icon={<Calendar size={20} />}>
-          <TextInput source="id" label="Identifiant" disabled fullWidth />
-          <TextInput source="dayLabel" label="Libellé du jour" validate={required()} fullWidth />
-          <NumberInput source="order" label="Ordre" validate={required()} fullWidth />
-        </FormSection>
-        <FormSection title="Activités" icon={<Clock size={20} />}>
-          <ArrayInput source="activities" label="">
-            <SimpleFormIterator fullWidth sx={arrayIteratorSx}>
-              <FormRow>
-                <TextInput source="time" label="Heure" validate={required()} fullWidth />
-                <TextInput source="title" label="Activité" validate={required()} fullWidth />
-              </FormRow>
-              <TextInput source="location" label="Lieu / responsable" fullWidth />
-            </SimpleFormIterator>
-          </ArrayInput>
-        </FormSection>
-      </ModernEdit>
-    }
-    create={
-      <ModernCreate title="Nouveau jour" subtitle="Annonces de la semaine" defaultValues={{ order: 10, activities: [] }}>
-        <FormSection title="Jour" icon={<Calendar size={20} />}>
-          <TextInput source="id" label="Identifiant (ex. lundi)" validate={required()} fullWidth />
-          <TextInput source="dayLabel" label="Libellé" validate={required()} fullWidth />
-          <NumberInput source="order" label="Ordre" validate={required()} fullWidth />
-        </FormSection>
-        <FormSection title="Activités" icon={<Clock size={20} />}>
-          <ArrayInput source="activities" label="">
-            <SimpleFormIterator fullWidth sx={arrayIteratorSx}>
-              <FormRow>
-                <TextInput source="time" label="Heure" fullWidth />
-                <TextInput source="title" label="Activité" fullWidth />
-              </FormRow>
-              <TextInput source="location" label="Lieu / responsable" fullWidth />
-            </SimpleFormIterator>
-          </ArrayInput>
-        </FormSection>
-      </ModernCreate>
-    }
-    recordRepresentation="dayLabel"
-    options={{ label: 'Annonces semaine' }}
-  />
-)
-
 export const parishMassResources = (
   <Resource
     name="parishMassCategories"

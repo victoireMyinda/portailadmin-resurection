@@ -6,7 +6,6 @@ export { homeHeroSlideResources, homeCurateMessageResources, homeAboutResources 
 export {
   parishHistoryResources,
   parishCurateResources,
-  parishWeeklyResources,
   parishMassResources,
   parishCommissionResources,
   parishGroupResources,
@@ -18,4 +17,5 @@ export { mediaAlbumResources, mediaPhotoResources, mediaVideoResources } from '.
 export { churchSectionResources } from './church-sections'
 export { donationSettingsResources, donationPaymentMethodResources } from './donations'
 export { visitorMessageResources } from './visitor-messages'
+export { parishSecretaryVisitResources, parishCurateVisitResources } from './office-visits'
 export { parishUserResources } from './parish-users'
