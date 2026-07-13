@@ -12,7 +12,7 @@ import {
   getCachedParishUser,
 } from './auth/parish-users'
 
-const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL ?? 'myindavictoire@gmail.com'
+const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL ?? ''
 
 function resolveAdminEmail(username: string): string {
   if (username.includes('@')) return username.trim()

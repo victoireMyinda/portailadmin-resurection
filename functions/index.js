@@ -1,14 +1,13 @@
 import { initializeApp } from 'firebase-admin/app'
 import { onDocumentCreated } from 'firebase-functions/v2/firestore'
-import { defineSecret } from 'firebase-functions/params'
+import { defineSecret, defineString } from 'firebase-functions/params'
 import nodemailer from 'nodemailer'
 
 initializeApp()
 
 const gmailUser = defineSecret('GMAIL_USER')
 const gmailAppPassword = defineSecret('GMAIL_APP_PASSWORD')
-
-const NOTIFY_EMAIL = 'myindavictoire@gmail.com'
+const notifyEmail = defineString('NOTIFY_EMAIL', { default: '' })
 
 export const onVisitorMessageCreated = onDocumentCreated(
   {
@@ -23,9 +22,10 @@ export const onVisitorMessageCreated = onDocumentCreated(
     const { name, phone, message, createdAt } = data
     const user = gmailUser.value()
     const pass = gmailAppPassword.value()
+    const recipient = notifyEmail.value() || user
 
-    if (!user || !pass) {
-      console.error('GMAIL_USER ou GMAIL_APP_PASSWORD non configurés')
+    if (!user || !pass || !recipient) {
+      console.error('GMAIL_USER, GMAIL_APP_PASSWORD ou NOTIFY_EMAIL non configurés')
       return
     }
 
@@ -40,8 +40,8 @@ export const onVisitorMessageCreated = onDocumentCreated(
 
     await transporter.sendMail({
       from: `"Paroisse Résurrection" <${user}>`,
-      to: NOTIFY_EMAIL,
-      replyTo: NOTIFY_EMAIL,
+      to: recipient,
+      replyTo: recipient,
       subject: `[Portail] Nouveau message de ${name}`,
       text: [
         'Nouveau message depuis le portail public',
