@@ -8,7 +8,7 @@ import grotte from '@frontuser/assets/grotte.webp'
 import anciennegrotte from '@frontuser/assets/anciennegrotte.webp'
 import nouvellegrotte from '@frontuser/assets/nouvellegrotte.webp'
 import statutmarie from '@frontuser/assets/statutmarie.webp'
-import mediaData from '../../../../frontuser/src/data/media.json'
+import mediaData from '../../../../frontpublic/src/data/media.json'
 import type { MediaAlbumRecord, MediaPhotoRecord, MediaVideoRecord } from '../../types'
 
 const imageByKey: Record<string, string> = {

@@ -1,4 +1,4 @@
-import liturgyData from '../../../../frontuser/src/data/liturgy.json'
+import liturgyData from '../../../../frontpublic/src/data/liturgy.json'
 import type { LiturgyCalendarRecord, LiturgyDailyRecord, LiturgyHomilyRecord } from '../../types'
 
 const defaultSeasons = [

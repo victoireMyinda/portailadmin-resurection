@@ -88,6 +88,7 @@ function BannerCardGrid() {
               <PageBannerPreviewDisplay
                 imageUrl={banner.imageUrl}
                 title={banner.title}
+                titleLine2={banner.titleLine2}
                 description={banner.description}
                 showCaption={false}
                 compact

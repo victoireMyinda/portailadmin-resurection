@@ -45,6 +45,7 @@ import {
   normalizeLiveStreamPlatformRecord,
   normalizeLiveStreamSettingsRecord,
 } from '../live-stream/live-embed'
+import { normalizeParishLogoRecord } from '../parish/normalize-logo'
 
 export { resetFirestoreSession }
 
@@ -116,12 +117,22 @@ function wrapFirestoreError(error: unknown): Error {
 
 async function fetchCollection(resource: string): Promise<StoredRecord[]> {
   const snap = await getDocs(collection(firestore, resource))
-  return snap.docs.map((document) => ({ id: document.id, ...document.data() }) as StoredRecord)
+  return snap.docs.map((document) =>
+    normalizeAfterRead(resource, { id: document.id, ...document.data() } as StoredRecord),
+  )
+}
+
+function normalizeAfterRead(resource: string, record: StoredRecord): StoredRecord {
+  if (resource === 'parishLogos') {
+    return normalizeParishLogoRecord(record) as StoredRecord
+  }
+  return record
 }
 
 function normalizeBeforeSave(resource: string, data: Record<string, unknown>): Record<string, unknown> {
   if (resource === 'liveStreamPlatforms') return normalizeLiveStreamPlatformRecord(data)
   if (resource === 'liveStreamSettings') return normalizeLiveStreamSettingsRecord(data)
+  if (resource === 'parishLogos') return normalizeParishLogoRecord(data)
   return data
 }
 
@@ -154,7 +165,9 @@ export const firestoreDataProvider = {
     await ensureReady()
     const snap = await getDoc(doc(firestore, resource, String(params.id)))
     if (!snap.exists()) throw new Error(`Record ${params.id} not found in ${resource}`)
-    return { data: { id: snap.id, ...snap.data() } as StoredRecord }
+    return {
+      data: normalizeAfterRead(resource, { id: snap.id, ...snap.data() } as StoredRecord),
+    }
   },
 
   getMany: async (resource, params: GetManyParams) => {
@@ -162,7 +175,9 @@ export const firestoreDataProvider = {
     const records = await Promise.all(
       params.ids.map(async (id) => {
         const snap = await getDoc(doc(firestore, resource, String(id)))
-        return snap.exists() ? ({ id: snap.id, ...snap.data() } as StoredRecord) : null
+        return snap.exists()
+          ? normalizeAfterRead(resource, { id: snap.id, ...snap.data() } as StoredRecord)
+          : null
       }),
     )
     return { data: records.filter(Boolean) as StoredRecord[] }

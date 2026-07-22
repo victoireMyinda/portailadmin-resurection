@@ -5,7 +5,7 @@ import fidele from '@frontuser/assets/fidele.webp'
 import grotte from '@frontuser/assets/grotte.webp'
 import statutmarie from '@frontuser/assets/statutmarie.webp'
 import nouvellegrotte from '@frontuser/assets/nouvellegrotte.webp'
-import announcementsData from '../../../../frontuser/src/data/announcements.json'
+import announcementsData from '../../../../frontpublic/src/data/announcements.json'
 import type { AnnouncementRecord } from '../../types'
 
 const imageByKey: Record<string, string> = {

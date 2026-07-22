@@ -1,5 +1,5 @@
 /**
- * Charte couleur partagée — alignée sur le portail public (frontuser/src/index.css)
+ * Charte couleur partagée — alignée sur le portail public (frontpublic/src/index.css)
  */
 export const brand = {
   royal: '#0D47A1',

@@ -4,6 +4,41 @@ import { LogoListView } from '../ui/LogoCardGrid'
 import { HeaderBrandPreviewLive } from '../ui/HeaderBrandPreview'
 import { FormSection, ModernCreate, ModernEdit, ModernListShell } from '../ui/modern'
 
+const headerLineFields = (
+  <>
+    <TextInput
+      source="headerArchdiocese"
+      label="Ligne 1 — Archidiocèse"
+      validate={required()}
+      fullWidth
+      defaultValue="Archidiocèse de Kinshasa"
+      helperText="Première ligne à côté du logo — visible sur mobile et desktop"
+    />
+    <TextInput
+      source="headerDeanery"
+      label="Ligne 2 — Doyenné"
+      validate={required()}
+      fullWidth
+      defaultValue="Doyenné Elimo Santu"
+    />
+    <TextInput
+      source="headerParish"
+      label="Ligne 3 — Paroisse (accent principal)"
+      validate={required()}
+      fullWidth
+      defaultValue="PAROISSE DE LA RESURRECTION"
+      helperText="Affichée en bleu / or, en gras"
+    />
+    <TextInput
+      source="headerLocation"
+      label="Ligne 4 — Localisation"
+      validate={required()}
+      fullWidth
+      defaultValue="Lemba/Salongo"
+    />
+  </>
+)
+
 export const parishLogoResources = (
   <Resource
     name="parishLogos"
@@ -15,7 +50,7 @@ export const parishLogoResources = (
     edit={
       <ModernEdit
         title="Modifier l'identité visuelle"
-        subtitle="Reproduit l’affichage du header : logo rond + titre principal + sous-titre"
+        subtitle="Logo, textes à côté du logo et titres des bannières"
       >
         <FormSection
           title="Aperçu en direct"
@@ -39,20 +74,36 @@ export const parishLogoResources = (
             helperText="Image carrée recommandée (affichée en cercle avec bordure dorée)"
           />
         </FormSection>
-        <FormSection title="Textes de l'en-tête" icon={<Type size={20} />}>
+        <FormSection
+          title="Textes à côté du logo"
+          icon={<Type size={20} />}
+          description="Quatre lignes affichées à droite du logo dans l’en-tête (mobile et desktop)"
+        >
+          {headerLineFields}
+        </FormSection>
+        <FormSection title="Textes du pied de page" icon={<Type size={20} />}>
           <TextInput
             source="primaryTitle"
-            label="Titre principal"
+            label="Titre principal (footer)"
             validate={required()}
             fullWidth
-            helperText="Ex. Paroisse de la Résurrection — en bleu / or sur le site"
+            helperText="Utilisé dans le pied de page du site"
           />
           <TextInput
             source="secondaryTitle"
-            label="Titre secondaire"
+            label="Titre secondaire (footer)"
             validate={required()}
             fullWidth
-            helperText="Ex. Lemba Salongo, Kinshasa — sous-titre discret"
+            helperText="Sous-titre discret dans le pied de page"
+          />
+        </FormSection>
+        <FormSection title="Textes des bannières" icon={<Type size={20} />}>
+          <TextInput
+            source="archdioceseBannerTitle"
+            label="Titre archidiocèse (en-tête des bannières)"
+            fullWidth
+            defaultValue="Archidiocèse de Kinshasa"
+            helperText="Affiché en doré au-dessus du titre sur le carousel d’accueil et les bannières de pages"
           />
         </FormSection>
       </ModernEdit>
@@ -68,20 +119,31 @@ export const parishLogoResources = (
         <FormSection title="Image" icon={<ImageIcon size={20} />}>
           <TextInput source="imageUrl" label="URL de l'image" validate={required()} fullWidth />
         </FormSection>
-        <FormSection title="Titres" icon={<Type size={20} />}>
+        <FormSection title="Textes à côté du logo" icon={<Type size={20} />}>
+          {headerLineFields}
+        </FormSection>
+        <FormSection title="Textes du pied de page" icon={<Type size={20} />}>
           <TextInput
             source="primaryTitle"
-            label="Titre principal"
+            label="Titre principal (footer)"
             validate={required()}
             fullWidth
             defaultValue="Paroisse de la Résurrection"
           />
           <TextInput
             source="secondaryTitle"
-            label="Titre secondaire"
+            label="Titre secondaire (footer)"
             validate={required()}
             fullWidth
             defaultValue="Lemba Salongo, Kinshasa"
+          />
+        </FormSection>
+        <FormSection title="Textes des bannières" icon={<Type size={20} />}>
+          <TextInput
+            source="archdioceseBannerTitle"
+            label="Titre archidiocèse (en-tête des bannières)"
+            fullWidth
+            defaultValue="Archidiocèse de Kinshasa"
           />
         </FormSection>
       </ModernCreate>

@@ -1,4 +1,4 @@
-import { mainNavigation } from '../../../../frontuser/src/config/navigation'
+import { mainNavigation } from '../../../../frontpublic/src/config/navigation'
 import type { NavigationItemRecord } from '../../types'
 
 const NAV_LABELS_FR: Record<string, string> = {

@@ -1,6 +1,6 @@
 /**
  * Collections Firestore gérées par frontadmin.
- * Contrat partagé avec frontuser (lecture seule) — voir frontuser/src/firebase/cms-contract.ts
+ * Contrat partagé avec frontuser (lecture seule) — voir frontpublic/src/firebase/cms-contract.ts
  */
 export const RESOURCE_NAMES = [
   'contacts',

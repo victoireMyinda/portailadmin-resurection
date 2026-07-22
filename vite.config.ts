@@ -8,7 +8,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
-      '@frontuser': path.resolve(__dirname, '../frontuser/src'),
+      '@frontuser': path.resolve(__dirname, '../frontpublic/src'),
     },
   },
   server: {

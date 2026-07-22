@@ -3,7 +3,7 @@ import chorale from '@frontuser/assets/chorale.webp'
 import fidele from '@frontuser/assets/fidele.webp'
 import grotte from '@frontuser/assets/grotte.webp'
 import paroisse from '@frontuser/assets/paroisse.webp'
-import parishData from '../../../../frontuser/src/data/parish.json'
+import parishData from '../../../../frontpublic/src/data/parish.json'
 import type { HomeAboutRecord, HomeCurateMessageRecord, HomeHeroSlideRecord } from '../../types'
 
 export function buildHomeHeroSlidesSeed(): HomeHeroSlideRecord[] {

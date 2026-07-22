@@ -5,9 +5,9 @@ import fidele from '@frontuser/assets/fidele.webp'
 import grotte from '@frontuser/assets/grotte.webp'
 import statutmarie from '@frontuser/assets/statutmarie.webp'
 import cloche2 from '@frontuser/assets/cloche2.webp'
-import commissionsData from '../../../../frontuser/src/data/commissions.json'
-import weeklyScheduleData from '../../../../frontuser/src/data/weekly-schedule.json'
-import parishData from '../../../../frontuser/src/data/parish.json'
+import commissionsData from '../../../../frontpublic/src/data/commissions.json'
+import weeklyScheduleData from '../../../../frontpublic/src/data/weekly-schedule.json'
+import parishData from '../../../../frontpublic/src/data/parish.json'
 import type {
   ParishCommissionRecord,
   ParishCurateRecord,

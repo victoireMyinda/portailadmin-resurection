@@ -1,12 +1,15 @@
 import { useWatch } from 'react-hook-form'
 import { Box, Typography, alpha } from '@mui/material'
 import { parishColors } from '../../theme/parishTheme'
+import { useParishLogoArchdioceseTitle } from './ParishLogoArchdioceseField'
 
 type PageBannerPreviewDisplayProps = {
   imageUrl?: string
   title?: string
+  titleLine2?: string
   description?: string
   pagePath?: string
+  archdioceseTitle?: string
   showCaption?: boolean
   compact?: boolean
 }
@@ -15,8 +18,10 @@ type PageBannerPreviewDisplayProps = {
 export function PageBannerPreviewDisplay({
   imageUrl,
   title,
+  titleLine2,
   description,
   pagePath,
+  archdioceseTitle,
   showCaption = true,
   compact = false,
 }: PageBannerPreviewDisplayProps) {
@@ -88,6 +93,20 @@ export function PageBannerPreviewDisplay({
           }}
         />
         <Box sx={{ position: 'relative', zIndex: 1, px: 3, py: compact ? 2 : 3, maxWidth: 480 }}>
+          {archdioceseTitle && (
+            <Typography
+              sx={{
+                mb: compact ? 0.75 : 1,
+                fontFamily: '"Playfair Display", serif',
+                fontSize: compact ? 13 : 16,
+                fontWeight: 700,
+                color: parishColors.gold,
+                textShadow: '0 2px 12px rgba(0,0,0,0.35)',
+              }}
+            >
+              {archdioceseTitle}
+            </Typography>
+          )}
           <Typography
             sx={{
               fontFamily: '"Playfair Display", serif',
@@ -98,6 +117,14 @@ export function PageBannerPreviewDisplay({
             }}
           >
             {title || 'Titre de la bannière'}
+            {titleLine2 && (
+              <>
+                <br />
+                <Box component="span" sx={{ color: parishColors.gold }}>
+                  {titleLine2}
+                </Box>
+              </>
+            )}
           </Typography>
           {description && (
             <Typography
@@ -122,15 +149,19 @@ export function PageBannerPreviewDisplay({
 export function PageBannerPreviewLive() {
   const imageUrl = useWatch({ name: 'imageUrl' }) as string | undefined
   const title = useWatch({ name: 'title' }) as string | undefined
+  const titleLine2 = useWatch({ name: 'titleLine2' }) as string | undefined
   const description = useWatch({ name: 'description' }) as string | undefined
   const pagePath = useWatch({ name: 'pagePath' }) as string | undefined
+  const archdioceseTitle = useParishLogoArchdioceseTitle()
 
   return (
     <PageBannerPreviewDisplay
       imageUrl={imageUrl}
       title={title || 'Titre de la bannière'}
+      titleLine2={titleLine2}
       description={description}
       pagePath={pagePath}
+      archdioceseTitle={archdioceseTitle}
     />
   )
 }

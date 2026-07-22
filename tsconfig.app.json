@@ -24,15 +24,15 @@
   },
   "include": [
     "src",
-    "../frontuser/src/config/navigation.ts",
-    "../frontuser/src/i18n/content/fr/church.ts",
-    "../frontuser/src/data/parish.json",
-    "../frontuser/src/data/commissions.json",
-    "../frontuser/src/data/weekly-schedule.json",
-    "../frontuser/src/data/announcements.json",
-    "../frontuser/src/data/media.json",
-    "../frontuser/src/data/donations.json",
-    "../frontuser/src/data/liturgy.json",
-    "../frontuser/src/data/live.json"
+    "../frontpublic/src/config/navigation.ts",
+    "../frontpublic/src/i18n/content/fr/church.ts",
+    "../frontpublic/src/data/parish.json",
+    "../frontpublic/src/data/commissions.json",
+    "../frontpublic/src/data/weekly-schedule.json",
+    "../frontpublic/src/data/announcements.json",
+    "../frontpublic/src/data/media.json",
+    "../frontpublic/src/data/donations.json",
+    "../frontpublic/src/data/liturgy.json",
+    "../frontpublic/src/data/live.json"
   ]
 }

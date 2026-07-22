@@ -1,5 +1,5 @@
-import { churchSectionIds } from '../../../../frontuser/src/config/navigation'
-import { churchFr } from '../../../../frontuser/src/i18n/content/fr/church'
+import { churchSectionIds } from '../../../../frontpublic/src/config/navigation'
+import { churchFr } from '../../../../frontpublic/src/i18n/content/fr/church'
 import type { ChurchSectionRecord } from '../../types'
 
 export const churchSectionChoices = churchSectionIds.map((id) => ({

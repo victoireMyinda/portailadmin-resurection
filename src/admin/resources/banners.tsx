@@ -2,6 +2,7 @@ import { NumberInput, Resource, TextInput, required } from 'react-admin'
 import { FileText, Image as ImageIcon, Link2, Type } from 'lucide-react'
 import { BannerListView } from '../ui/BannerCardGrid'
 import { PageBannerPreviewLive } from '../ui/PageBannerPreview'
+import { ParishLogoArchdioceseField } from '../ui/ParishLogoArchdioceseField'
 import { FormSection, ModernCreate, ModernEdit, ModernListShell } from '../ui/modern'
 
 const bannerFormFields = (
@@ -39,12 +40,19 @@ const bannerFormFields = (
       />
     </FormSection>
     <FormSection title="Textes de la bannière" icon={<Type size={20} />}>
+      <ParishLogoArchdioceseField />
       <TextInput
         source="title"
         label="Titre"
         validate={required()}
         fullWidth
         helperText="Titre principal centré sur la bannière"
+      />
+      <TextInput
+        source="titleLine2"
+        label="Titre 2 (accent doré)"
+        fullWidth
+        helperText="Deuxième ligne du titre, affichée en doré sur le portail public"
       />
       <TextInput
         source="description"

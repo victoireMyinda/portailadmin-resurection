@@ -1,5 +1,5 @@
-import donationsData from '../../../../frontuser/src/data/donations.json'
-import { paymentLogos } from '../../../../frontuser/src/assets/payment-logos'
+import donationsData from '../../../../frontpublic/src/data/donations.json'
+import { paymentLogos } from '../../../../frontpublic/src/assets/payment-logos'
 import type { DonationPaymentMethodRecord, DonationSettingsRecord } from '../../types'
 
 export const donationCurrencyChoices = [

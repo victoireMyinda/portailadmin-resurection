@@ -10,6 +10,7 @@ import { HomeHeroListView } from '../ui/HomeHeroCardGrid'
 import { CurateMessageListView } from '../ui/CurateMessageCardGrid'
 import { HomeAboutListView } from '../ui/AboutCardGrid'
 import { HeroSlidePreviewLive } from '../ui/HeroSlidePreview'
+import { ParishLogoArchdioceseField } from '../ui/ParishLogoArchdioceseField'
 import { CurateMessagePreviewLive } from '../ui/CurateMessagePreview'
 import { AboutPreviewLive } from '../ui/AboutPreview'
 import { FormSection, ModernCreate, ModernEdit, ModernListShell } from '../ui/modern'
@@ -39,12 +40,13 @@ export const homeHeroSlideResources = (
           />
         </FormSection>
         <FormSection title="Textes" icon={<Type size={20} />}>
+          <ParishLogoArchdioceseField />
           <TextInput source="title" label="Titre" validate={required()} fullWidth />
           <TextInput
             source="titleLine2"
-            label="Titre ligne 2 (accent doré)"
+            label="Titre 2 (accent doré)"
             fullWidth
-            helperText="Uniquement pour le slide principal"
+            helperText="Deuxième ligne du titre, affichée en doré sur le portail public"
           />
           <TextInput
             source="description"
@@ -85,8 +87,9 @@ export const homeHeroSlideResources = (
           <BooleanInput source="featured" label="Slide principal" />
         </FormSection>
         <FormSection title="Textes" icon={<Type size={20} />}>
+          <ParishLogoArchdioceseField />
           <TextInput source="title" label="Titre" validate={required()} fullWidth />
-          <TextInput source="titleLine2" label="Titre ligne 2" fullWidth />
+          <TextInput source="titleLine2" label="Titre 2 (accent doré)" fullWidth />
           <TextInput source="description" label="Description" validate={required()} fullWidth multiline rows={2} />
         </FormSection>
         <FormSection title="Bouton" icon={<Link2 size={20} />}>

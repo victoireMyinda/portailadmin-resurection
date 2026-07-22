@@ -19,6 +19,11 @@ export interface ParishLogoRecord {
   imageUrl: string
   primaryTitle: string
   secondaryTitle: string
+  archdioceseBannerTitle?: string
+  headerArchdiocese?: string
+  headerDeanery?: string
+  headerParish?: string
+  headerLocation?: string
 }
 
 export interface NavigationItemRecord {
@@ -34,6 +39,7 @@ export interface PageBannerRecord {
   id: string
   imageUrl: string
   title: string
+  titleLine2?: string
   description: string
   pagePath: string
   order?: number

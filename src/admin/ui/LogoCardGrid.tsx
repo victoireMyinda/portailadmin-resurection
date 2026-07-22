@@ -101,22 +101,26 @@ function LogoCardGrid() {
                   imageUrl={String(r.imageUrl ?? '')}
                   primaryTitle={String(r.primaryTitle ?? '')}
                   secondaryTitle={String(r.secondaryTitle ?? '')}
+                  headerArchdiocese={String(r.headerArchdiocese ?? '')}
+                  headerDeanery={String(r.headerDeanery ?? '')}
+                  headerParish={String(r.headerParish ?? '')}
+                  headerLocation={String(r.headerLocation ?? '')}
                 />
                 <Stack direction="row" spacing={2} sx={{ mt: 2, pt: 2, borderTop: '1px dashed', borderColor: 'divider' }}>
                   <Box sx={{ minWidth: 0, flex: 1 }}>
                     <Typography variant="caption" color="text.secondary">
-                      Titre principal
+                      Paroisse (ligne 3)
                     </Typography>
                     <Typography variant="body2" sx={{ fontWeight: 600 }} noWrap>
-                      {String(r.primaryTitle ?? '—')}
+                      {String(r.headerParish ?? r.primaryTitle ?? '—')}
                     </Typography>
                   </Box>
                   <Box sx={{ minWidth: 0, flex: 1 }}>
                     <Typography variant="caption" color="text.secondary">
-                      Titre secondaire
+                      Localisation (ligne 4)
                     </Typography>
                     <Typography variant="body2" color="text.secondary" noWrap>
-                      {String(r.secondaryTitle ?? '—')}
+                      {String(r.headerLocation ?? r.secondaryTitle ?? '—')}
                     </Typography>
                   </Box>
                 </Stack>

@@ -1,4 +1,4 @@
-import liveData from '../../../../frontuser/src/data/live.json'
+import liveData from '../../../../frontpublic/src/data/live.json'
 import type { LiveStreamPlatformRecord, LiveStreamSettingsRecord } from '../../types'
 
 export const livePlatformIds = ['youtube', 'facebook', 'tiktok'] as const

@@ -2,10 +2,12 @@ import { useWatch } from 'react-hook-form'
 import { Box, Button, Typography, alpha } from '@mui/material'
 import { parishColors } from '../../theme/parishTheme'
 import type { HomeHeroSlideRecord } from '../../types'
+import { useParishLogoArchdioceseTitle } from './ParishLogoArchdioceseField'
 
 type HeroSlidePreviewDisplayProps = Partial<HomeHeroSlideRecord> & {
   showCaption?: boolean
   compact?: boolean
+  archdioceseTitle?: string
 }
 
 export function HeroSlidePreviewDisplay({
@@ -15,6 +17,7 @@ export function HeroSlidePreviewDisplay({
   description,
   ctaLabel,
   featured,
+  archdioceseTitle,
   showCaption = true,
   compact = false,
 }: HeroSlidePreviewDisplayProps) {
@@ -75,6 +78,20 @@ export function HeroSlidePreviewDisplay({
           }}
         />
         <Box sx={{ position: 'relative', zIndex: 1, maxWidth: 520 }}>
+          {archdioceseTitle && (
+            <Typography
+              sx={{
+                mb: compact ? 1 : 1.5,
+                fontFamily: '"Playfair Display", serif',
+                fontSize: compact ? 14 : 18,
+                fontWeight: 700,
+                color: parishColors.gold,
+                textShadow: '0 2px 12px rgba(0,0,0,0.35)',
+              }}
+            >
+              {archdioceseTitle}
+            </Typography>
+          )}
           {featured ? (
             <Typography
               sx={{
@@ -141,6 +158,7 @@ export function HeroSlidePreviewLive() {
   const description = useWatch({ name: 'description' }) as string | undefined
   const ctaLabel = useWatch({ name: 'ctaLabel' }) as string | undefined
   const featured = useWatch({ name: 'featured' }) as boolean | undefined
+  const archdioceseTitle = useParishLogoArchdioceseTitle()
 
   return (
     <HeroSlidePreviewDisplay
@@ -150,6 +168,7 @@ export function HeroSlidePreviewLive() {
       description={description}
       ctaLabel={ctaLabel}
       featured={featured}
+      archdioceseTitle={archdioceseTitle}
     />
   )
 }
